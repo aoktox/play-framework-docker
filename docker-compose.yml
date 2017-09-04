@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+  myapp:
+    stdin_open: true
+    image: 'bitnami/java-play:latest'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '8888:8888'
+      - '9000:9000'
+    volumes:
+      - .:/app
+
+  db:
+      image: mysql
+      environment:
+          MYSQL_ROOT_PASSWORD: inipassword
+      volumes:
+       - ./mysql-datastore:/var/lib/mysql
+
+  adminer:
+      image: adminer
+      ports:
+          - 8080:8080
+
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    environment:
+      - REDIS_PASSWORD=inipassword
+    volumes:
+      - ./redis-datastore:/bitnami
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    volumes:
+      - ./elasticsearch-datastore:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
