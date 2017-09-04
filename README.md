@@ -24,6 +24,8 @@ To run this app
 
 ```
 git clone https://github.com/aoktox/play-framework-docker.git
+```
 
+```
 docker-compose up
 ```
