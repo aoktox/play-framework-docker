@@ -3,7 +3,7 @@ version: '2'
 services:
   myapp:
     stdin_open: true
-    image: 'bitnami/java-play:latest'
+    image: 'aoktox/javaplay-dev:latest'
     labels:
       kompose.service.type: nodeport
     ports:
