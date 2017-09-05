@@ -1,4 +1,4 @@
-./myapp/*
-./elasticsearch-datastore/*
-./mysql-datastore/*
-./redis-datastore/*
+myapp/*
+elasticsearch-datastore/*
+mysql-datastore/*
+redis-datastore/*
